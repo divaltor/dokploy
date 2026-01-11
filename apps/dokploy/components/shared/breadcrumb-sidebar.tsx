@@ -43,7 +43,7 @@ export const BreadcrumbSidebar = ({ list }: Props) => {
 							{list.map((item, index) => (
 								<Fragment key={item.name}>
 									<BreadcrumbItem className="block">
-										{item.dropdownItems && item.dropdownItems.length > 0 ? (
+										{item.dropdownItems && item.dropdownItems.length > 1 ? (
 											<DropdownMenu>
 												<DropdownMenuTrigger className="flex items-center gap-1 hover:text-foreground transition-colors outline-none">
 													{item.name}
@@ -57,6 +57,10 @@ export const BreadcrumbSidebar = ({ list }: Props) => {
 													))}
 												</DropdownMenuContent>
 											</DropdownMenu>
+										) : item.dropdownItems?.length === 1 ? (
+											<BreadcrumbLink asChild>
+												<Link href={item.dropdownItems[0]?.href ?? "#"}>{item.name}</Link>
+											</BreadcrumbLink>
 										) : (
 											<BreadcrumbLink href={item?.href} asChild={!!item?.href}>
 												{item.href ? (
